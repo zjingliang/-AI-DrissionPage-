@@ -79,16 +79,16 @@ def homework(url="https://i.chaoxing.com/", model_type=True):
                     if chaoxing.ele("@text()=视频", timeout=1.5):
                         chaoxing.ele("@text()=视频", timeout=1).click()
                     else:
-                        print("无法查找到视频控件！")
+                        color_print("无法查找到视频控件！")
                         pass
                 except Exception as e:
                     pass
 
                 try:
                     title_information = str(chaoxing.listen.wait().response.body)
-                    print(title_information[:100])
+                    color_print(title_information[:100])
                 except Exception as e:
-                    print("未获取到数据包！")
+                    color_print("未获取到数据包！")
                     pass
 
                 try:
@@ -118,10 +118,10 @@ def homework(url="https://i.chaoxing.com/", model_type=True):
                             chaoxing.ele(
                                 "@class=tkTopic_title").get_screenshot(
                                 path=rf"./自动下载题库/img.png")
-                            print(f"课堂在线题目检查成功！")
+                            color_print(f"课堂在线题目检查成功！")
                             img_file = rf"./自动下载题库/img.png"
                             img_data_url = image_to_base64(img_file)
-                            print("题库下载成功！")
+                            color_print("题库下载成功！")
 
                             # 调用API回答问题
                             # 创建聊天完成请求
@@ -183,15 +183,15 @@ def homework(url="https://i.chaoxing.com/", model_type=True):
                         question_count = len(chaoxing.eles("xpath=//*[@id=\"ZyBottom\"]/div[*]"))
                         # print(question_count)
                         for number in range(question_count):
-                            print(f"开始检查题目{number + 1}...")
+                            color_print(f"开始检查题目{number + 1}...")
                             time.sleep(0.5)
                             chaoxing.ele(
                                 f"xpath=/html/body/div[6]/div/div[2]/div/form/div/div[{number + 1}]").get_screenshot(
                                 path=rf"./自动下载题库/img_{number + 1}.png")
-                            print(f"题目{number + 1}检查成功！")
+                            color_print(f"题目{number + 1}检查成功！")
                             img_file = rf"./自动下载题库/img_{number + 1}.png"
                             img_data_url = image_to_base64(img_file)
-                            print("题库下载成功！")
+                            color_print("题库下载成功！")
                             # 调用API回答问题
                             completion = client.chat.completions.create(
                                 model="qwen3-vl-plus",
@@ -220,8 +220,8 @@ def homework(url="https://i.chaoxing.com/", model_type=True):
                                 "C", "3").replace("D", "4").replace("E", "5").replace("F", "6").replace("G",
                                                                                                         "7").replace(
                                 "H", "8").replace("I", "9")
-                            # color_print("最终答案：", completion.choices[0].message.content.replace("1", "A").replace("2", "B").replace("3", "C").replace("4", "D").replace("5", "E").replace("6", "F").replace("7", "G").replace("8", "H").replace("9", "I"))
-                            print(answers_num)
+                            # color_color_print("最终答案：", completion.choices[0].message.content.replace("1", "A").replace("2", "B").replace("3", "C").replace("4", "D").replace("5", "E").replace("6", "F").replace("7", "G").replace("8", "H").replace("9", "I"))
+                            color_print(answers_num)
                             for answer in answers_num:
                                 if chaoxing.ele(
                                         f"xpath=//*[@id=\"ZyBottom\"]/div[{number + 1}]/div/div[2]//li[{answer}]/label/span",
@@ -229,7 +229,7 @@ def homework(url="https://i.chaoxing.com/", model_type=True):
                                     chaoxing.ele(
                                         f"xpath=//*[@id=\"ZyBottom\"]/div[{number + 1}]/div/div[2]//li[{answer}]/label/span").click()
                                 else:
-                                    print("选择按钮失效！")
+                                    color_print("选择按钮失效！")
                                     break
                                 "//*[@id=\"ZyBottom\"]/div[4]/div/div[2]/div/ul/li[1]/label/span"
                         if chaoxing.ele("@text()=提交", timeout=0.5):
@@ -239,10 +239,10 @@ def homework(url="https://i.chaoxing.com/", model_type=True):
                                 try:
                                     chaoxing.ele("xpath=//*[@id=\"popok\"]").click()
                                 except Exception as e:
-                                    print("第二次提交按钮失效！")
+                                    color_print("第二次提交按钮失效！")
                                     pass
                         else:
-                            print("第一次提交按钮失效！")
+                            color_print("第一次提交按钮失效！")
                             pass
                 except Exception as e:
                     continue
