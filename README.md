@@ -19,7 +19,11 @@
 
 ## 🚀 安装步骤
 ### 1. 下载项目源码
-直接下载项目压缩包
+直接下载项目压缩包，或通过git克隆（需安装git）：
+```bash
+git clone https://github.com/zjingliang/-AI-DrissionPage-.git
+cd -AI-DrissionPage-
+```
 
 ### 2. 安装依赖包
 执行以下命令安装项目所需第三方依赖：
